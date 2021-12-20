@@ -139,7 +139,7 @@ int main(int argc, char **argv)
 	segment *segments = NULL;
 
 	opterr = 1;
-	while((c = getopt(argc, argv, "12vabcftdpn8meh?lqr:")) != -1)
+	while((c = getopt(argc, argv, "12vabcftdpn8meh?lqr:w")) != -1)
 		switch(c) {
 			case '1':		// apple 1
 				rate = 8000;
@@ -190,6 +190,11 @@ int main(int argc, char **argv)
 				break;
 			case 'p':		// stdout
 				fileoutput = 0;
+				outputtype = MONITOR;
+				break;
+			case 'w':		// stdout wave
+				fileoutput = 0;
+				outputtype = WAVE;
 				break;
 			case 'n':
 				noformat = 1;
@@ -437,15 +442,6 @@ int main(int argc, char **argv)
 				return 1;
 			}
 		}
-	}
-	else {
-/*
-		if(!model)
-			outputtype = MONITOR;
-		else
-			outputtype = AIFF;
-*/
-		outputtype = MONITOR;
 	}
 
 	if(outputtype != MONITOR && !model) {
